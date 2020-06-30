@@ -61,7 +61,7 @@ class Start:
         self.help_button = Button(self.quiz_frame, text="Help / Rules",
                                   width=10, bg="light grey", font="arial 16 bold",
                                   command=self.to_help)
-        self.help_button.grid(row=4, column=1, pady=10)
+        self.help_button.grid(row=4, column=1, pady=20)
 
     def to_help(self):
         get_help = Help(self)
@@ -70,12 +70,6 @@ class Start:
         get_quiz = Quiz(self)
 
 
-class Quiz:
-    def __init__(self):
-
-
-class Help:
-    def __init__(self):
 
 # main routine
 if __name__ == "__main__":
