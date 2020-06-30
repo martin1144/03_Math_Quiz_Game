@@ -24,7 +24,7 @@ class Start:
         self.entry_error_frame.grid(row=1, column=1)
 
         self.start_quiz_entry = Entry(self.entry_error_frame,
-                                      font="Arial 19 bold", width=10)
+                                      font="Arial 19 bold", width=5)
         self.start_quiz_entry.grid(row=0, column=0)
 
         self.math_quiz_instruction = Label(self.start_frame, font="Arial 10 italic",
