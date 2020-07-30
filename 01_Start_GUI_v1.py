@@ -40,21 +40,21 @@ class Start:
         self.easy_button = Button(self.quiz_frame, text="Easy",
                                   pady=10, padx=10, width=10,
                                   bg="light blue", fg="white",
-                                  command=lambda: self.to_quiz)
+                                  command=lambda: self.to_quiz(1))
         self.easy_button.grid(row=0, column=0, padx=5)
 
         # blue medium mode button
         self.medium_button = Button(self.quiz_frame, text="Medium",
                                     pady=10, padx=10, width=10,
                                     bg="blue", fg="white",
-                                    command=lambda: self.to_quiz)
+                                    command=lambda: self.to_quiz(2))
         self.medium_button.grid(row=0, column=1, padx=5)
 
         # dark blue hard mode button
         self.hard_button = Button(self.quiz_frame, text="Hard",
                                   pady=10, padx=10, width=10,
                                   bg="dark blue", fg="white",
-                                  command=lambda: self.to_quiz)
+                                  command=lambda: self.to_quiz(3))
         self.hard_button.grid(row=0, column=2, padx=5)
 
         # Help / Rules Button (row 4)
