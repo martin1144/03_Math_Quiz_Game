@@ -129,6 +129,7 @@ class Quiz:
         print(number_of_questions)
         print(levels)
 
+
         # initialise variables
         self.numbers = IntVar()
         # Set number of questions to amount entered by user at the start
@@ -151,28 +152,43 @@ class Quiz:
                                        font="Arial 10", padx=10, pady=10)
         self.instruction_label.grid(row=1)
 
-        self.next_button = Button(self.quiz_box,
+        self.entry_error_frame = Frame(self.quiz_frame)
+        self.entry_error_frame.grid(row=2, column=0)
+
+        self.game_quiz_entry = Entry(self.entry_error_frame,
+                                     font="Arial 19 bold", width=5)
+        self.game_quiz_entry.grid(row=2, column=0)
+
+        # Next button
+        self.next_button = Button(self.quiz_frame,
                                    font="Arial 12 bold",
                                    text="Next")
-        self.next_button.grid(row=2, column=0, pady=10, padx=10)
+        self.next_button.grid(row=3, column=0, pady=10)
 
+        # Check button
         self.check_button = Button(self.quiz_frame,
                                    font="Arial 12 bold",
                                    text="Check")
-        self.check_button.grid(row=2, pady=10, padx=10)
+        self.check_button.grid(row=2, column=1)
 
-        self.entry_error_frame = Frame(self.quiz_frame)
-        self.entry_error_frame.grid(row=1, column=1)
-
-        self.game_quiz_entry = Entry(self.quiz_frame,
-                                      font="Arial 19 bold", width=5)
-        self.game_quiz_entry.grid(row=2, column=0)
-
+        # Game Stats Button
+        self.game_stats__button = Button(self.quiz_frame,
+                                    font="Arial 12 bold",
+                                    text="Game Stats")
+        self.game_stats__button.grid(row=3, column=1)
 
 
 
 
-        
+
+
+
+
+
+
+
+
+
 
 
 
