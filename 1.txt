@@ -1,0 +1,5 @@
+the low number was: 2
+the high number was: 3
+played 1 throughout
+you got 0 correct out of 1  
+['2 x 2'] 
