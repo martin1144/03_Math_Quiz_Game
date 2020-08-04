@@ -2,10 +2,28 @@ from tkinter import *
 from functools import partial  # To prevent unwanted windows
 import random
 
+class Quiz:
+    def __init__(self, partner):
+
+        self.start_frame = Frame(padx=10, pady=10)
+        self.start_frame.grid()
+
+        # Math Quiz Game Heading (row 0)
+        self.math_quiz_label = Label(self.start_frame, text="Export",
+                                     font="Arial 19 bold")
+        self.math_quiz_label.grid(row=1)
+
+        # Help button (row 2)
+        self.export_button = Button(self.start_frame, text="Export",
+                                  command=lambda: self.to_quiz)
+        self.export_button.grid(row=2, pady=10)
+
+    def to_quiz(self):
+        get_export = Export(self)
 
 class Export:
-    def __init__(self, partner, low_amount, high_amount, questions_played, how_many_right, history_questions):
-        print(low_amount, high_amount, questions_played, how_many_right)
+    def __init__(self, partner, lower_amount, higher_amount, questions_played, how_many_correct, history_questions):
+        print(lower_amount, higher_amount, questions_played, how_many_correct)
         print(history_questions)
 
         background_color = "#8589FF"
@@ -45,7 +63,7 @@ class Export:
                                                            "The high number had: {}""\n"
                                                            "you have played {} around""\n"
                                                            "you got {} correct out of {}  ""\n"
-                                   .format(low_amount, high_amount, questions_played, how_many_right, questions_played),
+                                   .format(lower_amount, higher_amount, questions_played, how_many_correct, questions_played),
                                    font="arial 13 italic",
                                    justify=LEFT, width=50, bg=background_color, wrap=200)
         self.history_label.grid(row=2)
@@ -73,7 +91,7 @@ class Export:
                                       bg="#8589FF")
         self.save_error_label.grid(row=5)
 
-        # Save / Cancel Frame (row 4)
+        # Save and Cancel Frame (row 4)
         self.save_cancel_frame = Frame(self.export_frame)
         self.save_cancel_frame.grid(row=6, pady=10)
 
@@ -81,8 +99,8 @@ class Export:
         self.save_button = Button(self.save_cancel_frame, text="Save",
                                   font="arial 10 bold", fg="black",
                                   bg="maroon", padx=10, pady=10,
-                                  command=partial(lambda: self.save_history(partner, low_amount, high_amount,
-                                                                            questions_played, how_many_right,
+                                  command=partial(lambda: self.save_history(partner, lower_amount, higher_amount,
+                                                                            questions_played, how_many_correct,
                                                                             history_questions)))
         self.save_button.grid(row=0, column=0)
 
@@ -92,8 +110,7 @@ class Export:
                                     command=partial(self.close_export, partner))
         self.cancel_button.grid(row=0, column=1)
 
-
-    def save_history(self, partner, low_amount, high_amount, questions_played, how_many_right, history_questions):
+    def save_history(self, partner, lower_amount, higher_amount, questions_played, how_many_correct, history_questions):
         # Regular expression to check filename is valid
         valid_char = "[A-Za-z0-9_]"
         has_error = "no"
@@ -133,10 +150,10 @@ class Export:
             f = open(filename, "w+")
 
             # add new line at end of each item
-            f.write("the low number was: {}""\n".format(low_amount))
-            f.write("the high number was: {}""\n".format(high_amount))
+            f.write("the low number was: {}""\n".format(lower_amount))
+            f.write("the high number was: {}""\n".format(higher_amount))
             f.write("played {} throughout""\n".format(questions_played))
-            f.write("you got {} correct out of {}  ""\n".format(how_many_right, questions_played))
+            f.write("you got {} correct out of {}  ""\n".format(how_many_correct, questions_played))
             f.write("{} ""\n".format(history_questions))
 
             # close file
@@ -151,10 +168,10 @@ class Export:
         partner.export_button.config(state=NORMAL)
         self.export_box.destroy()
 
-
 # main routine
 if __name__ == "__main__":
     root = Tk()
-    root.title("Math Quiz")
-    something = Start(root)
+    root.title("Quiz")
+    root.configure(background='white')
+    something = Quiz(root)
     root.mainloop()

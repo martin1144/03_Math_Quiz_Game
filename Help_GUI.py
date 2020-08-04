@@ -8,12 +8,12 @@ class Start:
         self.start_frame = Frame(padx=10, pady=10)
         self.start_frame.grid()
 
-        # Math Quiz Game Heading (row 0)
+        # Quiz Game Heading (row 0)
         self.math_quiz_label = Label(self.start_frame, text="Math Quiz Game",
-                                     font="Arial 19 bold")
+                                     font="Arial 16 bold")
         self.math_quiz_label.grid(row=1)
 
-        # Help button (row 2)
+        # Help Button (row 2)
         self.help_button = Button(self.start_frame, text="Help/Rules",
                                   command=self.to_quiz)
         self.help_button.grid(row=2, pady=10)
@@ -45,15 +45,15 @@ class Help:
         # Help text (label, row 1)
         self.help_text = Label(self.help_frame,
                                text="As you can see this is a Math Quiz Game"
-                                    " This includes addition and multiplication \n"
+                                    " This includes addition and multiplication.\n"
                                     "\n"
-                                    "In order to play this Math Quiz Game\n"
+                                    "In order to play this Math Quiz Game.\n"
                                     "\n"
-                                    "The first box on the top is the Amount of questions you want..\n"
+                                    "The first box on the top is the Amount of questions you want.\n"
                                     "\n"
-                                    "The second box is for the lowest number you want, e.g if you put 5, the questions will be asked won't go less than 5..\n"
+                                    "The second box is for the lowest number you want, e.g if you put 5, the questions will be asked won't go less than 5.\n"
                                     "\n"
-                                    "Lastly the third box is for the highest number you want, e.g if you put 20, the questions will be asked won't go more than 20..\n "
+                                    "Lastly the third box is for the highest number you want, e.g if you put 20, the questions will be asked won't go more than 20.\n "
                                     "\n",
                                justify=LEFT, width=50, bg=background_color, wrap=400, font="arial 15 ")
         self.help_text.grid(column=0, row=1)
