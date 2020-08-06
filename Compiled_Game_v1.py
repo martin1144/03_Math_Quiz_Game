@@ -295,7 +295,7 @@ class Game:
         var_correct = self.correct.get()
 
         # change background to white (for testing purposes) ...
-        self.check_answer_button.config(bg="white")
+        self.check_answer_button.config(bg="#EA6B66")
         self.check_answer_button.config(text="")
 
         try:
@@ -552,7 +552,7 @@ class Export:
 
 class Help:
     def __init__(self, partner):
-        background_color = "#8589FF"
+        background_color = "#EA6B66"
 
         # disable help button
         partner.help_button.config(state=DISABLED)
