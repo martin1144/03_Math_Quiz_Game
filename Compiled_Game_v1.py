@@ -33,7 +33,7 @@ class Quiz:
         # Heading (row 0)
         self.maths_label = Label(text="Math Quiz",
                                  font="Arial 32 bold",
-                                 fg="#8589FF",
+                                 fg="#8589FF", bg="white",
                                  padx=10, pady=10)
         self.maths_label.grid(row=0)
 
@@ -42,7 +42,7 @@ class Quiz:
                                         text="Choose a level below!", bg=background_color)
         self.amount_error_label.grid(row=5, columnspan=6)
 
-        self.entry_label_1 = Label(self.entry_frame, text="Available numbers of questions are 1 to 10", font="Arial 10",
+        self.entry_label_1 = Label(self.entry_frame, text="Available numbers of questions are only to 1 to 10!", font="Arial 10",
                                    bg="white", pady=1)
         self.entry_label_1.grid(row=1, column=2, columnspan=3)
         self.amount_entry = Entry(self.entry_frame, width=5,
@@ -92,6 +92,7 @@ class Quiz:
         self.easy_button.config(state=DISABLED)
         self.hard_button.config(state=DISABLED)
 
+
         # stats / help button frame (row 5)
         self.stats_help_frame = Frame(self.quiz_frame)
         self.stats_help_frame.grid(row=4, pady=10)
@@ -100,12 +101,10 @@ class Quiz:
                                   text="Help/Rules", width=12, command=self.help)
         self.help_button.grid(row=0, column=1)
 
-
     def help(self):
         print("Help needed?")
         get_help = Help(self)
         get_help.help_text.configure()
-
 
     def check_question(self):
         starting_question = self.amount_entry.get()
@@ -134,11 +133,10 @@ class Quiz:
 
             if starting_question < 1:
                 has_error = "yes"
-                error_feedback = "Number is needed"
+                error_feedback = "Number is needed/You can't go lower than 1!"
             elif starting_question > 10:
                 has_error = "yes"
                 error_feedback = "Sorry but 10 is the highest question in this Quiz"
-
 
         except ValueError:
             has_error = "yes"
@@ -154,7 +152,6 @@ class Quiz:
                 has_error = "yes"
                 error_feedback = "Sorry but the low number cant go higher than 50!"
 
-
         except ValueError:
             has_error = "yes"
             error_feedback = "You need to fill all of it!"
@@ -169,10 +166,9 @@ class Quiz:
                 has_error = "yes"
                 error_feedback = "Sorry the high number cannot go higher than 60"
 
-
         except ValueError:
             has_error = "yes"
-            error_feedback = "You can only put whole numbers on the boxes!"
+            error_feedback = "You've got to put numbers on all the boxes to start the Quiz!"
 
         if has_error == "yes":
             self.amount_entry.config(bg=error_back)
@@ -189,7 +185,6 @@ class Quiz:
             self.lower_number_entry.config(state=DISABLED)
             self.higher_number_entry.config(state=DISABLED)
             self.amount_entry.config(state=DISABLED)
-
 
     def to_game(self, op):
         starting_question = self.amount_entry.get()
@@ -215,6 +210,7 @@ class Game:
 
         op = int(op)
 
+        # Generates addition
         if op == 1:
             higher_low_number = random.randrange(lower_amount, higher_amount)
             higher_low_number2 = random.randrange(lower_amount, higher_amount)
@@ -222,6 +218,7 @@ class Game:
             var_correct = higher_low_number + higher_low_number2
             self.correct.set(var_correct)
             op_text = "Quiz / Easy Mode"
+        # Generates Multiplication
         elif op == 3:
             higher_low_number = random.randrange(lower_amount, higher_amount)
             higher_low_number2 = random.randrange(lower_amount, higher_amount)
@@ -280,7 +277,6 @@ class Game:
                                                                    self.history_questions))
         self.check_answer_button.grid(row=1, column=1)
 
-
     def check_answer(self, lower_amount, higher_amount, op, starting_question, questions_played, how_many_correct,
                   history_questions):
         answer = self.game_entry.get()
@@ -312,7 +308,7 @@ class Game:
             elif answer == correct:
                 has_error = "no"
                 self.feedback_label = Label(self.ask_questions_frame, text="Good Job!",
-                                            font="arial 10 bold", fg="black", bg="#8589FF", pady=7, width=25)
+                                            font="arial 10 bold", fg="black", bg="white", pady=7, width=25)
                 self.feedback_label.grid(row=3)
                 how_many_correct += 1
 
@@ -323,9 +319,9 @@ class Game:
             self.feedback_label.grid(row=3)
 
         if questions_played >= starting_question:
-            self.finished_btn = Label(self.dismiss_export_frame, text="Your Done!", font="arial 10 bold", fg="black",
+            self.finished_button = Label(self.dismiss_export_frame, text="Your Done!", font="arial 10 bold", fg="black",
                                       bg="#8589FF", pady=9, width=14)
-            self.finished_btn.grid(row=1, column=1)
+            self.finished_button.grid(row=1, column=1)
             self.export_button = Button(self.dismiss_export_frame, text="Export", font="arial 13 bold", fg="black",
                                         bg="#8589FF", pady=7, width=10,
                                         command=lambda: self.export(lower_amount, higher_amount, questions_played,
@@ -344,12 +340,12 @@ class Game:
                                       text="Number Of Question:{}/{}".format(questions_played, starting_question))
             self.played_label.grid(row=0)
 
-
     def next(self, lower_amount, higher_amount, op, starting_question, questions_played, how_many_correct, history_questions):
         starting_question = int(starting_question)
         self.game_entry.config(state=NORMAL)
         self.game_entry.delete(0, 'end')
 
+        # Generates Addition/Subtraction/Multiplication
         if op == 1:
             higher_low_number = random.randrange(lower_amount, higher_amount)
             higher_low_number2 = random.randrange(lower_amount, higher_amount)
@@ -385,7 +381,6 @@ class Game:
                                                                    history_questions))
         self.check_answer_button.grid(row=1, column=1)
 
-
     def close_game(self, partner):
         # Put help button back to normal
         partner.easy_button.config(state=DISABLED)
@@ -397,7 +392,6 @@ class Game:
         partner.amount_entry.config(state=NORMAL)
 
         self.easy_box.destroy()
-
 
     def export(self, lower_amount, higher_amount, questions_played, how_many_correct, history_questions):
         Export(self, lower_amount, higher_amount, questions_played, how_many_correct, history_questions)
@@ -491,7 +485,6 @@ class Export:
                                     command=partial(self.close_export, partner))
         self.cancel_button.grid(row=0, column=1)
 
-
     def save_history(self, partner, lower_amount, higher_amount, questions_played, how_many_correct, history_questions):
         # Regular expression to check filename is valid
         valid_char = "[A-Za-z0-9_]"
@@ -544,7 +537,6 @@ class Export:
             # close dialogue
             self.close_export(partner)
 
-
     def close_export(self, partner):
         # Put export button back to normal...
         partner.export_button.config(state=NORMAL)
@@ -552,7 +544,7 @@ class Export:
 
 class Help:
     def __init__(self, partner):
-        background_color = "#EA6B66"
+        background_color = "#8589FF"
 
         # disable help button
         partner.help_button.config(state=DISABLED)
@@ -577,12 +569,11 @@ class Help:
                                     " This includes addition and multiplication \n"
                                     "\n"
                                     "In order to play this Math Quiz Game\n"
+                                    "The first box on the top is the Amount of questions you want.\n"
                                     "\n"
-                                    "The first box on the top is the Amount of questions you want..\n"
+                                    "The second box is for the lowest number you want, e.g if you put 5, the questions will be asked won't go less than 5.\n"
                                     "\n"
-                                    "The second box is for the lowest number you want, e.g if you put 5, the questions will be asked won't go less than 5..\n"
-                                    "\n"
-                                    "Lastly the third box is for the highest number you want, e.g if you put 20, the questions will be asked won't go more than 20..\n "
+                                    "Lastly the third box is for the highest number you want, e.g if you put 20, the questions will be asked won't go more than 20.\n "
                                     "\n",
                                justify=LEFT, width=50, bg=background_color, wrap=400, font="arial 15 ")
         self.help_text.grid(column=0, row=1)
@@ -593,12 +584,10 @@ class Help:
                                      command=partial(self.close_help, partner))
         self.dismiss_button.grid(row=2, pady=10)
 
-
     def close_help(self, partner):
         # Put help button back to normal
         partner.help_button.config(state=NORMAL)
         self.help_box.destroy()
-
 
 # main routine
 if __name__ == "__main__":

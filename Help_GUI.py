@@ -23,7 +23,7 @@ class Start:
 
 class Help:
     def __init__(self, partner):
-        background_color = "#8589FF"
+        background_color = "#EA6B66"
 
         # disable help button
         partner.help_button.config(state=DISABLED)
